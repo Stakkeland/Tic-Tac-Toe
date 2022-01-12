@@ -7,34 +7,49 @@
 #<1 function
 
 #needs a function called main
+def create_board():
+    board = []
+    for square in range(9):
+        board.append(square + 1)
+    return board
 
-gm_list = [1,2,3,4,5,6,7,8,9]
+def create_board():
+    board = []
+    for square in range(9):
+        board.append(square + 1)
+    return board
 
-gm_board = (f'''{gm_list[1]} | {gm_list[2]} | {gm_list[3]}
-{gm_list[4]} | {gm_list[5]} | {gm_list[6]}
-{gm_list[7]} | {gm_list[8]} | {gm_list[9]}''')
+def display_board(board):
+    print()
+    print(f"{board[0]}|{board[1]}|{board[2]}")
+    print('-+-+-')
+    print(f"{board[3]}|{board[4]}|{board[5]}")
+    print('-+-+-')
+    print(f"{board[6]}|{board[7]}|{board[8]}")
+    print()
 
-def main():
+def is_a_draw(board):
+    for square in range(9):
+        if board[square] != "x" and board[square] != "o":
+            return False
+    return True 
 
-    gm_list = [1,2,3,4,5,6,7,8,9]
+def has_winner(board):
+    return (board[0] == board[1] == board[2] or
+            board[3] == board[4] == board[5] or
+            board[6] == board[7] == board[8] or
+            board[0] == board[3] == board[6] or
+            board[1] == board[4] == board[7] or
+            board[2] == board[5] == board[8] or
+            board[0] == board[4] == board[8] or
+            board[2] == board[4] == board[6])
 
-    gm_board = (f'''{gm_list[1]} | {gm_list[2]} | {gm_list[3]}
-{gm_list[4]} | {gm_list[5]} | {gm_list[6]}
-{gm_list[7]} | {gm_list[8]} | {gm_list[9]}''')
+def make_move(player, board):
+    square = int(input(f"{player}'s turn to choose a square (1-9): "))
+    board[square - 1] = player
 
-    #print statements to start the game
-    print(f'Velkommen til tre pa rad')
-    player1 = input('Player one what is your name: ')
-    player2 = input('Player 2 what is your name: ')
-    print(f'{player1} you will use xs and {player2} you will use os. Let the game begin.')
-
-    gm_loop
-
-def gm_loop():
-
-    print(gm_board)
-    #print game board
-
-    #player turn to choose (1-9):
-
-    #loop
+def next_player(current):
+    if current == "" or current == "o":
+        return "x"
+    elif current == "x":
+        return "o"
